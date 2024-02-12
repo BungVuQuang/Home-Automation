@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ------------------ROOT-VARIABLE------------------- */
+:root {
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7b8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677486;
+    --color-background: #f6f6f9;
+
+    --color-card-white: #fff;
+    --color-card-grey: #e0e0e0;
+
+    --color-label-dark: #363949;
+    --color-label-grey: #e0e0e0;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --border-color: #dbdbdb;
+    --primary-color: #ee4d2d;
+    --primary-hover: #ed5c3f;
+    --star-gold-color: #ffce3d;
+    --discount-color: rgba(255, 216, 64, 0.94);
+    --navbar-height: 33px;
+    --header-height: 70px;
+    --header-with-search-height: calc(var(--header-height) - var(--navbar-height));
+    --header-sort-bar-height: 46px;
+}
+
+
+
+/* =================DARK THEME VARAIBLES=========== */
+
+.dark-theme-variables {
+    --color-label-dark: #e0e0e0;
+    --color-label-grey: #363949;
+    --color-background: #181a1e;
+    --color-white: #101a3d;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-card-white: #2b3757;
+    --color-card-grey: #f6f6f9;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    /* font-family: Helvetica Neue,Helvetica,Arial,文泉驛正黑,WenQuanYi Zen Hei,Hiragino Sans GB,儷黑 Pro,LiHei Pro,Heiti TC,微軟正黑體,Microsoft JhengHei UI,Microsoft JhengHei,sans-serif;
+    color: rgba(0,0,0,0.8); */
+    width: 100vw;
+    height: 100vh;
+    color: var(--color-dark);
+    font-family: poppins, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    /*Prevent text selection*/
+    overflow-x: hidden;
+    /*chieu rong Noi dung du thua se bi an di*/
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+
+html {
+    font-size: 14px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* font-size: 62.5%;
+    line-height: 1.6rem;
+    /* font-family:'Roboto',sans-serif; 
+    box-sizing: border-box; */
+a {
+    color: var(--color-dark);
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+h1 {
+    color: var(--color-dark);
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+h3 {
+    color: var(--color-label-dark);
+    font-size: 0.87rem;
+}
+
+h4 {
+    color: var(--color-label-dark);
+    font-size: 0.8rem;
+}
+
+h5 {
+    font-size: 0.77rem;
+}
+
+small {
+    font-size: 0.75rem
+}
+
+.profile-photo {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.text-muted {
+    color: var(--color-info-dark);
+}
+
+p {
+    color: var(--color-dark-variant);
+}
+
+b {
+    color: var(--color-dark);
+}
+
+.primary {
+    color: var(--color-primary);
+}
+
+.danger {
+    color: var(--color-danger);
+}
+
+.success {
+    color: var(--color-success);
+}
+
+.warning {
+    color: var(--color-warning);
+}
+
+/* Animation */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes growth {
+    from {
+        transform: scale(var(--growth-from));
+    }
+
+    to {
+        transform: scale(var(--growth-to));
+    }
+}

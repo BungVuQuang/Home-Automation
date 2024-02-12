@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Home Automation</title>
+    <link rel="icon" href="./assets/img/logo_smart_home.png">
+    <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/0.7.0/modern-normalize.min.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <!-- MATERIAL CDN -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-5.14.0-web/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- HIGHTCHART CDN-->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- MQTT CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.2.7/mqtt.min.js"></script>
+    <!-- THINGBOARD CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/2.0.2/luxon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-socket-js/1.0.0/web_socket.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <!-- FONT ICON -->
+    <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="toast">
+            <div class="toast-content">
+                <i class="uil uil-check toast-check"></i>
+                <div class="message">
+                    <span class="message-text text-1">Success</span>
+                    <span class="message-text text-2">Defaul Toast</span>
+                </div>
+            </div>
+            <i class="uil uil-multiply toast-close"></i>
+            <div class="progress-toast"></div>
+        </div>
+        <aside>
+            <div class="top">
+                <div style="display: inline-flex;align-items: center;
+                justify-content: space-between;">
+                    <div class="logo">
+                        <img src="assets/img/logo.png">
+
+                    </div>
+                    <h2>IIOT <span class="danger">Lab</span></h2>
+                </div>
+
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+
+            <div class="side-bar">
+                <div class="tab-item active">
+                    <span class="material-symbols-outlined">home</span>
+                    <h3>Home</h3>
+                </div>
+                <div class="tab-item ">
+                    <span class="material-symbols-outlined">
+                        network_node
+                    </span>
+                    <h3>Mesh Network</h3>
+                </div>
+                <div class="tab-item ">
+                    <span class="material-symbols-outlined">
+                        history
+                    </span>
+                    <h3>History Data</h3>
+                </div>
+                <div class="tab-item ">
+                    <span class="material-symbols-outlined">
+                        alarm
+                    </span>
+                    <h3>Create Alarm</h3>
+                </div>
+                <div class="tab-item ">
+                    <span class="material-symbols-outlined">
+                        format_list_numbered
+                    </span>
+                    <h3>Alarm List</h3>
+                </div>
+            </div>
+        </aside>
+        <!------------------ END OF ASIDE --------->
+        <main>
+            <div class="app-content">
+                <div id="status-bar">
+                    <img src="./assets/img/attention.png" alt="attention" class="alert-status-icon">
+                    <span id="connection-status">Kết nối đến Gateway: Đã kết nối</span>
+                </div>
+                <div class="tab-pane active">
+                    <img src="assets/img/home.png">
+                </div>
+                <div class="tab-pane">
+                    <h1>Mesh Network</h1>
+                    <div class="grid-container mesh">
+                    </div>
+                </div>
+                <div class="tab-pane">
+                    <h1>History Data</h1>
+                    <div class="content">
+                        <div>
+                            <div class="search-table graphic">
+                                <div style="width: 100%;">
+                                    <label for="select-node-graphic">Select Node:</label>
+                                    <select id="select-node-graphic">
+                                        <option value="Node1">Node 1</option>
+                                        <option value="Node2">Node 2</option>
+                                        <option value="Node3">Node 3</option>
+                                        <option value="Node4">Node 4</option>
+                                    </select>
+                                    <label for="type-graphic">Device Select:</label>
+                                    <select id="type-graphic">
+                                        <option value="temperature">Temperature</option>
+                                        <option value="humidity">Humidity</option>
+                                        <option value="light">Light</option>
+                                        <option value="led1">Led1</option>
+                                        <option value="led2">Led2</option>
+                                        <option value="led3">Led3</option>
+                                        <option value="led4">Led4</option>
+                                        <option value="aOnOff">Air Conditioner</option>
+                                    </select>
+                                    <label for="from-date">From:</label>
+                                    <input type="date" id="from-date-graphic">
+
+                                    <label for="to-date-graphic">To:</label>
+                                    <input type="date" id="to-date-graphic">
+                                </div>
+                                <div>
+                                    <label for="select-option">Select Option:</label>
+                                    <select id="select-option-graphic">
+                                        <option value="date">Date Filter</option>
+                                        <option value="hour">24Hour Filter</option>
+                                    </select>
+                                </div>
+
+
+                                <button id="search-button-graphic">Search</button>
+                            </div>
+                            <div id="chart-container" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane">
+                    <h1>Create Alarm</h1>
+                    <div class="content">
+                        <div>
+                            <div class="search-table alarm">
+                                <div style="width: 100%;">
+                                    <label for="select-node-alarm">Select Node:</label>
+                                    <select id="select-node-alarm">
+                                        <option value="Node1">Node 1</option>
+                                        <option value="Node2">Node 2</option>
+                                        <option value="Node3">Node 3</option>
+                                        <option value="Node4">Node 4</option>
+                                    </select>
+                                    <label for="type-alarm">Device Select:</label>
+                                    <select id="type-alarm">
+                                        <option value="temperature">Temperature</option>
+                                        <option value="humidity">Humidity</option>
+                                        <option value="light">Light</option>
+                                        <option value="led1">Led1</option>
+                                        <option value="led2">Led2</option>
+                                        <option value="led3">Led3</option>
+                                        <option value="led4">Led4</option>
+                                        <option value="air">Air Conditioner</option>
+                                    </select>
+                                    <label for="type-state">State:</label>
+                                    <select id="type-state">
+                                        <option value="1">ON</option>
+                                        <option value="0">OFF</option>
+                                    </select>
+                                    <label for="date-alarm">Date:</label>
+                                    <input type="date" id="date-alarm">
+
+                                    <label for="time-alarm">Time:</label>
+                                    <input type="time" id="time-alarm">
+                                </div>
+                                <button id="search-button-alarm">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane">
+                    <h1>Alarm List</h1>
+                    <div class="grid-container list">
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!----------------------------- END OF MAIN -------------------->
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Bung Vu</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="dropdown">
+                        <div class="logo" onclick="toggleDropdown()">
+                            <img src="assets/img/logo.jpg" alt="Logo">
+                        </div>
+                        <div class="dropdown-content" id="dropdown-content">
+                            <a href="account.html">Account</a>
+                            <a href="index.html">Log out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js" type="module"></script>
+</body>
+
+</html>
